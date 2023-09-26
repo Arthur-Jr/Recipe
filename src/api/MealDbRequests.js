@@ -4,7 +4,8 @@ export async function inputTextRequest(searchOption = 'name', text = '') {
   try {
     const chosedEndpoint = searchOption === 'name' ? `${ENDPOINT}/search.php?s` : `${ENDPOINT}/filter.php?i`;
     const response = await fetch(`${chosedEndpoint}=${text}`);
-    return response.json();
+    const result = await response.json();
+    return result.meals;
   } catch (err) {
     return [];
   }
@@ -13,7 +14,8 @@ export async function inputTextRequest(searchOption = 'name', text = '') {
 export async function getMealById(id) {
   try {
     const response = await fetch(`${ENDPOINT}/lookup.php?i=${id}`);
-    return response.json();
+    const result = await response.json();
+    return result.meals;
   } catch (err) {
     return {};
   }
@@ -22,7 +24,8 @@ export async function getMealById(id) {
 export async function getMealByCategory(category) {
   try {
     const response = await fetch(`${ENDPOINT}/filter.php?c=${category}`);
-    return response;
+    const result = await response.json();
+    return result.meals;
   } catch (err) {
     return [];
   }
