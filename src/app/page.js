@@ -1,7 +1,12 @@
+import { Header } from "@/components";
+import AppProvider from "@/context/AppProvider";
+
 export default function Home() {
   return (
-    <main className="bg-red-600 h-[1000px]">
-      Page
-    </main>
+    <AppProvider>
+      <main className="h-[1000px]">
+        <Header />
+      </main>
+    </AppProvider>
   )
 }
