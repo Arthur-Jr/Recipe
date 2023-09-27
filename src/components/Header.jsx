@@ -21,13 +21,13 @@ export default function Header() {
     return result;
   }
 
-  const handleTextInputSearh = async () => {
+  const handleTextInputSearch = async () => {
     let textToSearch = textInputValue;
 
     setIsDisabled(true);
     setTimeout(() => setIsDisabled(false), SIX_SECONDS);
   
-    if (searchLanguage === 'PT') {
+    if (searchLanguage === 'PT' && textInputValue.length > 0) {
       textToSearch = await handleTranslate();
     }
 
@@ -85,6 +85,7 @@ export default function Header() {
               type="button"
               onClick={() => { setSearchLanguage('PT'), setTextInputValue('') }}
               className={`${searchLanguage === 'PT' ? 'bg-gray-400' : 'bg-white'} h-[40px] p-1 text-sm`}
+              data-testid="pt-btn"
             >
               PT
             </button>
@@ -93,6 +94,7 @@ export default function Header() {
               type="button"
               onClick={() => { setSearchLanguage('EN'), setTextInputValue('') }}
               className={`${searchLanguage === 'EN' ? 'bg-gray-400' : 'bg-white'} h-[40px] p-1 text-sm rounded-r-xl`}
+              data-testid="en-btn"
             >
               EN
             </button>
@@ -100,7 +102,7 @@ export default function Header() {
 
           <button
             type="button"
-            onClick={ () => handleTextInputSearh() }
+            onClick={ () => handleTextInputSearch() }
             disabled={ isDisabled }
             className={`w-36 p-2 rounded-xl font-bold italic bg-white hover:scale-105 ${ isDisabled && 'hover:cursor-not-allowed' }`}
           >
@@ -121,12 +123,13 @@ export default function Header() {
             { category }
             <input
               type="radio"
-              value={ category }
+              value={ categories[category] }
               name="filter"
               id={ category }
               disabled={ isDisabled }
               onClick={ () => handleRadioButtonSearch(categories[category]) }
               className="hidden"
+              data-testid="category-radio"
             />
           </label>
         ))}
