@@ -14,7 +14,7 @@ export default function Header() {
   const [searchLanguage, setSearchLanguage] = useState('PT');
   const [isDisabled, setIsDisabled] = useState(false);
 
-  const { setMealList } = useContext(appContext);
+  const { setMealList, setIsLoading } = useContext(appContext);
 
   const handleTranslate = async () => {
     const result = await translateTextPtToEN(textInputValue);
@@ -24,6 +24,8 @@ export default function Header() {
   const handleTextInputSearch = async () => {
     let textToSearch = textInputValue;
 
+    setMealList([]);
+    setIsLoading(true);
     setIsDisabled(true);
     setTimeout(() => setIsDisabled(false), SIX_SECONDS);
   
@@ -33,14 +35,18 @@ export default function Header() {
 
     const meals = await inputTextRequest(searchOption, textToSearch);
     setMealList(meals);
+    setIsLoading(false);
   }
 
   const handleRadioButtonSearch = async (category) => {
+    setMealList([]);
+    setIsLoading(true);
     setIsDisabled(true);
     setTimeout(() => setIsDisabled(false), SIX_SECONDS);
 
     const meals = await getMealByCategory(category);
     setMealList(meals);
+    setIsLoading(false);
   }
 
   return (
