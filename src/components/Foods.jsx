@@ -6,10 +6,12 @@ import Link from 'next/link';
 
 import { appContext } from '@/context/AppProvider';
 import { getAllMeals } from '@/api/MealDbRequests';
+import Pagination from './Pagination';
 
 export default function Foods() {
   const { setMealList, mealList, isLoading, setIsLoading } = useContext(appContext);
-  const [page, setPage] = useState([0, 10]);
+  const [mealsToDisplay, setMealsToDisplay] = useState([]);
+  const [pageMeals, setPageMeals] = useState([0, 10]);
 
   useEffect(() => {
     const getMeals = async () => {
@@ -21,6 +23,13 @@ export default function Foods() {
     getMeals();
   }, [setMealList, setIsLoading]);
 
+  useEffect(() => {
+    setMealsToDisplay(mealList.slice(pageMeals[0], pageMeals[1]));
+  }, [mealList, pageMeals, setMealsToDisplay]);
+
+  useEffect(() => {
+    setPageMeals([0, 10]);
+  }, [mealList]);
 
   return (
     <div className="flex flex-col items-center">
@@ -28,7 +37,7 @@ export default function Foods() {
       { mealList.length === 0 && !isLoading && <span className="font-bold text-lg text-center">Não temos este prato no cardápio!</span> }
 
       <div className='flex flex-wrap justify-around py-6 md:w-[90%]'>
-        {mealList.slice(page[0], page[1]).map((meal) => (
+        {mealsToDisplay.map((meal) => (
           <Link
             key={meal.idMeal}
             href="http://google.com"
@@ -47,6 +56,8 @@ export default function Foods() {
           </Link>
         ))}
       </div>
+
+      { mealsToDisplay.length > 0  && <Pagination setPageMeals={ setPageMeals } /> }
     </div>
   )
 }
