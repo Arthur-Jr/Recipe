@@ -45,21 +45,27 @@ export default function Pagination({ setPageMeals }) {
 
   return (
     <div className="flex justify-evenly items-center min-w-[140px] p-2 h-10 mb-8 font-bold text-lg bg-primary-color text-white rounded-md">
-      { actualPage !== 1 && <button onClick={ () => setActualPage((p) => p - 1) }>{'<'}</button> }
+      { actualPage !== 1 && 
+        <button type="button" className="hover:scale-105" onClick={ () => setActualPage((p) => p - 1) }>
+          {'<'}
+        </button>
+      }
 
       {getPageNumbers().map((page) => (
         <button
           key={page}
           onClick={() => setActualPage(page)}
           disabled={ page === '...' || actualPage === page }
-          className={`${actualPage === page && 'disabled:underline'} underline-offset-2 px-1`}
+          className={`hover:scale-105 ${actualPage === page && 'disabled:underline'} underline-offset-2 px-1`}
         >
           {page}
         </button>
       ))}
 
       { pagesQuantity !== actualPage && pagesQuantity > 1 && 
-        <button onClick={ () => setActualPage((p) => p + 1) }>{'>'}</button>
+        <button type="button" className="hover:scale-105" onClick={ () => setActualPage((p) => p + 1) }>
+          {'>'}
+        </button>
       }
     </div>
   )
