@@ -57,6 +57,7 @@ export default function Pagination({ setPageMeals }) {
           onClick={() => setActualPage(page)}
           disabled={ page === '...' || actualPage === page }
           className={`hover:scale-105 ${actualPage === page && 'disabled:underline'} underline-offset-2 px-1`}
+          data-testid="page-numbers"
         >
           {page}
         </button>

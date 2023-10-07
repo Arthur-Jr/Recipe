@@ -41,6 +41,7 @@ export default function Foods() {
           <Link
             key={meal.idMeal}
             href="http://google.com"
+            data-testid="food-card"
             className="bg-primary-color mb-8 text-white w-[150px] h-[200px] border-solid border-[1px] border-primary-color hover:scale-105 md:w-[210px] md:h-[275px]"
           >
             <Image 
