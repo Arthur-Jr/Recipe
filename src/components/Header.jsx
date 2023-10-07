@@ -14,16 +14,19 @@ export default function Header() {
   const [searchLanguage, setSearchLanguage] = useState('PT');
   const [isDisabled, setIsDisabled] = useState(false);
 
-  const { setMealList } = useContext(appContext);
+  const { setMealList, setIsLoading } = useContext(appContext);
 
   const handleTranslate = async () => {
     const result = await translateTextPtToEN(textInputValue);
     return result;
   }
 
-  const handleTextInputSearch = async () => {
+  const handleTextInputSearch = async (e) => {
+    e.preventDefault();
     let textToSearch = textInputValue;
 
+    setMealList([]);
+    setIsLoading(true);
     setIsDisabled(true);
     setTimeout(() => setIsDisabled(false), SIX_SECONDS);
   
@@ -33,19 +36,28 @@ export default function Header() {
 
     const meals = await inputTextRequest(searchOption, textToSearch);
     setMealList(meals);
+    setIsLoading(false);
+    setTextInputValue('');
   }
 
   const handleRadioButtonSearch = async (category) => {
+    setMealList([]);
+    setIsLoading(true);
     setIsDisabled(true);
     setTimeout(() => setIsDisabled(false), SIX_SECONDS);
 
     const meals = await getMealByCategory(category);
     setMealList(meals);
+    setIsLoading(false);
+    setTextInputValue('');
   }
 
   return (
     <header className="flex flex-col h-56 w-full items-center">
-      <form className="flex flex-col items-center justify-around h-40 w-full bg-primary-color md:justify-evenly">
+      <form
+        onSubmit={ (e) => handleTextInputSearch(e) }
+        className="flex flex-col items-center justify-around h-40 w-full bg-primary-color md:justify-evenly"
+      >
         <div className="flex items-center justify-between w-full px-2 text-white min-[450px]:w-[400px]">
           {searchOptionList.map((option) => (
             <label
@@ -101,8 +113,7 @@ export default function Header() {
           </label>
 
           <button
-            type="button"
-            onClick={ () => handleTextInputSearch() }
+            type="submit"
             disabled={ isDisabled }
             className={`w-36 p-2 rounded-xl font-bold italic bg-white hover:scale-105 ${ isDisabled && 'hover:cursor-not-allowed' }`}
           >

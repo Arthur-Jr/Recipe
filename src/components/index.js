@@ -1,3 +1,4 @@
-import Header from "./Header";
+import Header from './Header';
+import Foods from './Foods';
 
-export { Header };
+export { Header, Foods };

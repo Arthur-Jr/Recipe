@@ -6,9 +6,10 @@ export const appContext = createContext();
 
 function AppProvider({ children }) {
   const [mealList, setMealList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   return (
-    <appContext.Provider value={{ mealList, setMealList }}>
+    <appContext.Provider value={{ mealList, setMealList, isLoading, setIsLoading }}>
       {children}
     </appContext.Provider>
   );
