@@ -7,7 +7,6 @@ export async function inputTextRequest(searchOption = 'name', text = '') {
     const result = await response.json();
     return result.meals || [];
   } catch (err) {
-    console.log('eror')
     return [];
   }
 }
@@ -24,9 +23,9 @@ export async function getAllMeals() {
 
 export async function getMealById(id) {
   try {
-    const response = await fetch(`${ENDPOINT}/lookup.php?i=${id}`);
+    const response = await fetch(`${ENDPOINT}/lookup.php?i=${id}`, { cache: 'force-cache' });
     const result = await response.json();
-    return result.meals || {};
+    return result.meals[0] || {};
   } catch (err) {
     return {};
   }

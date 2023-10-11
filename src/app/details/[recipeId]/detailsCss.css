@@ -1,0 +1,158 @@
+.details-main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.back-btn {
+  display: absolute;
+}
+
+.title-section {
+  color: var(--primary-color);
+  width: 100%;
+}
+
+.recipe-image {
+  height: auto;
+  width: 100%;
+}
+
+.title-section h1 {
+  align-self: self-start;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 36px;
+  padding: 1rem 0.75rem 0;
+}
+
+.title-section h4 {
+  align-self: self-start;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 28px;
+  margin-top: 3px;
+  padding: 0 0.75rem 1rem;
+}
+
+.ingredient-section {
+  align-self: center;
+  background-color: var(--primary-color);
+  border-radius: 1rem;
+  width: 90%;
+  margin-top: 6px;
+  padding: 16px;
+}
+
+.ingredient-section li {
+  color: white;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 28px;
+  margin-bottom: 8px;
+}
+
+.intruction-section {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  margin-top: 32px;
+  width: 100%;
+}
+
+.intruction-section iframe {
+  border-radius: 12px;
+  height: 65vw;
+  width: 100%;
+  margin-bottom: 32px;
+}
+
+.intructions {
+  background-color: var(--primary-color);
+  border-radius: 16px;
+  color: white;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 28px;
+  padding: 18px;
+  width: 100%;
+  text-align: start;
+}
+
+@media only screen and (min-width: 430px) {
+  .details-main {
+    padding: 2.5rem 1.5rem 1.5rem;
+  }
+
+  .title-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .title-section h1 {
+    align-self: center;
+  }
+  
+  .title-section h4 {
+    align-self: center;
+  }
+
+  .recipe-image {
+    width: 80%;
+    border: solid 4px var(--primary-color);
+  }
+
+  .ingredient-section {
+    width: 80%;
+  }
+
+  .intructions {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 930px) {
+  .details-main {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 40px 5px 0;
+  }
+
+  .title-section {
+    align-self: flex-start;
+    width: 500px;
+  }
+
+  .recipe-image {
+    height: auto;
+    width: 400px;
+  }
+
+  .ingredient-section {
+    align-self: start;
+    width: 400px;
+  }
+
+  .intruction-section {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .intruction-section iframe {
+    align-self: center;
+    height: 510px;
+    width: 75%;
+    margin-left: 20px;
+  }
+
+  .intructions {
+    align-self: self-start;
+    min-height: 510px;
+    flex-grow: 1;
+  }
+}

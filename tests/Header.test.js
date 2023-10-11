@@ -12,6 +12,7 @@ const FIVE_SECONDS = 5000;
 
 describe('Header Tests:', () => {
   const setMealList = jest.fn();
+  const setIsLoading = jest.fn();
 
   beforeEach(() => {
     const mockResponse = {
@@ -28,13 +29,13 @@ describe('Header Tests:', () => {
     }))
 
     render(
-      <appContext.Provider value={{ setMealList }}>
+      <appContext.Provider value={{ setMealList, setIsLoading }}>
         <Header />
       </appContext.Provider>
     );
   });
 
-  afterAll(() => {
+  afterEach(() => {
     jest.clearAllMocks();
   });
 
@@ -86,7 +87,8 @@ describe('Header Tests:', () => {
     await act(() => userEvent.click(searchBtn));
     expect(global.fetch).toBeCalledTimes(1);
     expect(searchBtn).toBeDisabled();
-    expect(setMealList).toBeCalledTimes(1);
+    expect(setIsLoading).toBeCalledTimes(2);
+    expect(setMealList).toBeCalledTimes(2);
     setTimeout(() => expect(searchBtn).toBeEnabled(), FIVE_SECONDS);
   });
 
@@ -122,7 +124,8 @@ describe('Header Tests:', () => {
   
     expect(global.fetch).toBeCalledTimes(1);
     expect(searchBtn).toBeDisabled();
-    expect(setMealList).toBeCalledTimes(3);
+    expect(setIsLoading).toBeCalledTimes(2);
+    expect(setMealList).toBeCalledTimes(2);
     setTimeout(() => expect(searchBtn).toBeEnabled(), FIVE_SECONDS);
   });
 
@@ -140,7 +143,8 @@ describe('Header Tests:', () => {
 
     await act(() => userEvent.click(cateoryRadios[0]));
     expect(global.fetch).toBeCalledTimes(1);
-    expect(setMealList).toBeCalledTimes(4);
+    expect(setIsLoading).toBeCalledTimes(2);
+    expect(setMealList).toBeCalledTimes(2);
     expect(cateoryRadios[0]).toBeDisabled();
     expect(cateoryRadios[1]).toBeDisabled();
     expect(cateoryRadios[2]).toBeDisabled();
