@@ -41,6 +41,7 @@ export default async function RecipeDetails({ params: { recipeId } }) {
           height={100}
           alt="meal image"
           className="recipe-image"
+          data-testid="food-img"
         />
 
         <h1>{recipeData.strMeal}</h1>
@@ -49,16 +50,16 @@ export default async function RecipeDetails({ params: { recipeId } }) {
 
       <ul className="ingredient-section">
         {getIngredient().map((ingredient, index) => (
-          <li key={index}>
+          <li key={index} data-testid="ingredient-li">
             {ingredient}
           </li>
         ))}
       </ul>
 
       <section className="intruction-section">
-        { recipeData.strYoutube && <iframe src={ getEmbedVideo() } /> }
+        { recipeData.strYoutube && <iframe src={ getEmbedVideo() } data-testid="yt-video" /> }
 
-        <p className="intructions">
+        <p className="intructions" data-testid="instructions">
           {recipeData.strInstructions}
         </p>
       </section>
