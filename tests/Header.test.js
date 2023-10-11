@@ -40,7 +40,7 @@ describe('Header Tests:', () => {
   });
 
   it('Search option input: should exist 2 radio input of search-option', () => {
-    const radioInput = screen.getAllByLabelText(/buscar por/i);
+    const radioInput = screen.getAllByLabelText(/search by/i);
 
     expect(radioInput).toHaveLength(2);
     expect(radioInput[0]).toBeChecked();
@@ -49,7 +49,7 @@ describe('Header Tests:', () => {
   });
 
   it('Search option input: should change the checked input on click', async () => {
-    const radioInput = screen.getAllByLabelText(/buscar por/i);
+    const radioInput = screen.getAllByLabelText(/search by/i);
     await act(() => userEvent.click(radioInput[1]));
 
     expect(radioInput[1]).toBeChecked();
@@ -57,7 +57,7 @@ describe('Header Tests:', () => {
   });
 
   it('Search text input: should have the input on the document and his value should change onChange ', async () => {
-    const textInput = screen.getByPlaceholderText(/O que vamos comer hoje?/i);
+    const textInput = screen.getByPlaceholderText(/What we eating today?/i);
 
     expect(textInput).toBeInTheDocument();
     expect(textInput.value).toBe('');
@@ -72,16 +72,16 @@ describe('Header Tests:', () => {
 
     expect(ptButton).toBeInTheDocument();
     expect(enButton).toBeInTheDocument();
-    expect(ptButton.classList.contains('bg-gray-400')).toBeTruthy();
-    expect(enButton.classList.contains('bg-gray-400')).toBeFalsy();
-
-    await act(() => userEvent.click(enButton));
-    expect(ptButton.classList.contains('bg-gray-400')).toBeFalsy();
     expect(enButton.classList.contains('bg-gray-400')).toBeTruthy();
+    expect(ptButton.classList.contains('bg-gray-400')).toBeFalsy();
+
+    await act(() => userEvent.click(ptButton));
+    expect(enButton.classList.contains('bg-gray-400')).toBeFalsy();
+    expect(ptButton.classList.contains('bg-gray-400')).toBeTruthy();
   });
   
   it('Search text input: should have the search button and call fetch only 1 time if text input is empty', async () => {
-    const searchBtn = screen.getByText(/pesquisar/i);
+    const searchBtn = screen.getByText('Search', { exact: true });
 
     expect(searchBtn).toBeInTheDocument();
     await act(() => userEvent.click(searchBtn));
@@ -93,10 +93,11 @@ describe('Header Tests:', () => {
   });
 
   it('Search text input: should call fetch 2 times if text input has something and the language is PT', async () => {
-    const textInput = screen.getByPlaceholderText(/O que vamos comer hoje?/i);
+    const textInput = screen.getByPlaceholderText(/What we eating today?/i);
     const ptButton = screen.getByTestId('pt-btn');
-    const searchBtn = screen.getByText(/pesquisar/i);
+    const searchBtn = screen.getByText('Search', { exact: true });
 
+    await act(() => userEvent.click(ptButton));
     expect(ptButton.classList.contains('bg-gray-400')).toBeTruthy();
     expect(searchBtn).toBeInTheDocument();
 
@@ -110,9 +111,9 @@ describe('Header Tests:', () => {
   });
 
   it('Search text input: should call fetch 1 time if text input has something and the language is EN', async () => {
-    const textInput = screen.getByPlaceholderText(/O que vamos comer hoje?/i);
+    const textInput = screen.getByPlaceholderText(/What we eating today?/i);
     const enButton = screen.getByTestId('en-btn');
-    const searchBtn = screen.getByText(/pesquisar/i);
+    const searchBtn = screen.getByText('Search', { exact: true });
 
     expect(searchBtn).toBeInTheDocument();
 

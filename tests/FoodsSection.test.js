@@ -37,7 +37,7 @@ describe('Foods section tests:', () => {
   });
 
   it('should have loading message when there is no food on array and is loading is true', () => {
-    const loadingMessage = screen.getByText(/carregando/i);
+    const loadingMessage = screen.getByText(/loading/i);
     expect(loadingMessage).toBeInTheDocument();
   });
 
