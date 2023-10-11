@@ -33,8 +33,10 @@ export default function Foods() {
 
   return (
     <div className="flex flex-col items-center">
-      { mealList.length === 0 && isLoading && <span className="font-bold text-lg text-center">Carregando...</span> }
-      { mealList.length === 0 && !isLoading && <span className="font-bold text-lg text-center">Não temos este prato no cardápio!</span> }
+      { mealList.length === 0 && isLoading && <span className="font-bold text-lg text-center">Loading...</span> }
+      { mealList.length === 0 &&
+        !isLoading && <span className="font-bold text-lg text-center">{'We couldn\'t find this recipe!'}</span>
+      }
 
       <div className='flex flex-wrap justify-around py-6 md:w-[90%]'>
         {mealsToDisplay.map((meal) => (

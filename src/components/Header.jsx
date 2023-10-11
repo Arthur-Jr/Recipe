@@ -5,16 +5,18 @@ import { categories } from '../constants/mealsCategories';
 import { getMealByCategory, inputTextRequest } from '@/api/MealDbRequests';
 import { translateTextPtToEN } from '@/api/translateApi';
 import { appContext } from '@/context/AppProvider';
+import { texts } from '@/constants/texts';
 
 export default function Header() {
   const searchOptionList = ['name', 'ingredient'];
   const SIX_SECONDS = 6000;
   const [searchOption, setSearchOption] = useState('name');
   const [textInputValue, setTextInputValue] = useState('');
-  const [searchLanguage, setSearchLanguage] = useState('PT');
+  const [searchLanguage, setSearchLanguage] = useState('EN');
   const [isDisabled, setIsDisabled] = useState(false);
 
   const { setMealList, setIsLoading } = useContext(appContext);
+  const textByLanguage = texts[searchLanguage]; 
 
   const handleTranslate = async () => {
     const result = await translateTextPtToEN(textInputValue);
@@ -65,7 +67,7 @@ export default function Header() {
               htmlFor={ option }
               className="flex items-center italic font-bold text-sm hover:cursor-pointer sm:text-base"
             >
-              Buscar por { option === 'name' ? 'Nome' : 'Ingrediente' }
+              {`${textByLanguage.searchBy} ${textByLanguage[option]}`}
 
               <input
                 type="radio"
@@ -88,7 +90,7 @@ export default function Header() {
               id="input-text"
               name="text-search"
               onChange={ ({ target }) =>  setTextInputValue(target.value)}
-              placeholder="O que vamos comer hoje?"
+              placeholder={textByLanguage.texinputPlaceHolder}
               autoComplete="off"
               className="w-[90%] p-2 rounded-xl rounded-r-none focus:outline-none sm:w-[87%]"
             />
@@ -117,7 +119,7 @@ export default function Header() {
             disabled={ isDisabled }
             className={`w-36 p-2 rounded-xl font-bold italic bg-white hover:scale-105 ${ isDisabled && 'hover:cursor-not-allowed' }`}
           >
-            Pesquisar
+            { textByLanguage.searchBtn }
           </button>
         </div>
       </form>
@@ -131,7 +133,7 @@ export default function Header() {
               `flex justify-center rounded-xl p-2 mx-1 bg-primary-color italic text-white capitalize font-semibold text-sm hover:scale-105 hover:cursor-pointer ${ isDisabled && 'hover:cursor-not-allowed'} md:w-[120px]`
             }
           >
-            { category }
+            { searchLanguage === 'PT' ? category : categories[category] }
             <input
               type="radio"
               value={ categories[category] }
