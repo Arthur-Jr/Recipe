@@ -5,7 +5,7 @@ Api utilizada para crição do projeto [The Meal DB](https://www.themealdb.com/a
 
 <br>
 
-### [DEPLOY DO PROJETO!!!](https://main.dqgery3y364u2.amplifyapp.com)
+### [DEPLOY DO PROJETO!!!](https://main.dqgery3y364u2.amplifyapp.com) :eyes:
 
 <br>
 
