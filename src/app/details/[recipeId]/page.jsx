@@ -29,7 +29,7 @@ export default async function RecipeDetails({ params: { recipeId } }) {
 
   const getEmbedVideo = () => {
     const videoId = recipeData.strYoutube.split('v=');
-    return `http://www.youtube.com/embed/${videoId[1]}`;
+    return `https://www.youtube.com/embed/${videoId[1]}`;
   }
 
   return (
