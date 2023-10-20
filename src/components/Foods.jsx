@@ -38,7 +38,7 @@ export default function Foods() {
         !isLoading && <span className="font-bold text-lg text-center">{'We couldn\'t find this recipe!'}</span>
       }
 
-      <div className='flex flex-wrap justify-around py-6 md:w-[90%]'>
+      <div className='flex flex-wrap justify-around py-6 md:w-[90%] min-[1390px]:w-[70%] min-[1570px]:w-[65%]'>
         {mealsToDisplay.map((meal) => (
           <Link
             key={meal.idMeal}

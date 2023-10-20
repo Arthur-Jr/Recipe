@@ -124,7 +124,7 @@ export default function Header() {
         </div>
       </form>
 
-      <form className="flex items-start w-full h-12 mt-2 overflow-x-scroll whitespace-nowrap md:overflow-hidden md:justify-around">
+      <form className="flex items-start w-full h-12 mt-2 overflow-x-scroll whitespace-nowrap md:overflow-hidden md:justify-around min-[1500px]:w-[90%]">
         {Object.keys(categories).map((category) => (
           <label
             htmlFor={ category }
