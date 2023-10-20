@@ -1,5 +1,5 @@
 # Contexto
-Foi desenvolvido um site receitas, nele sera possível buscar e aprender novos pratos. Foi utilizado para desenvolvimento o next.js com um design reponsivo.
+Projeto desenvolvido em next.js com foco em Front End, onde consome uma API de receitas de terceiros. O foco da projeto é a busca de receitas por nome do prato, ingredientes e categoria, com um design ituitivo e responsivo para tambem poder ser consumido em dispositivos mobile.
 
 Api utilizada para crição do projeto [The Meal DB](https://www.themealdb.com/api.php).
 
